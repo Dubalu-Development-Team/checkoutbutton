@@ -18,10 +18,6 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
   let quantityShoppingCart = 1;
   let valuesVariants = {};
 
-  // const mashupID = '~2RtpU94f9CnoO5a';
-  // const productID = '~2m7JYMEyHDgtn';
-  // const shopUrl = 'https://rocioshop.com/';
-
   const root = document.getElementById('checkout-button-container');
   if (!root) {
     throw new Error('element whit id checkout-button-container not found');
@@ -42,14 +38,10 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
       }).then(r => {
         subProducts = r.results;
       }),
-    ])
-      .catch(
-        () => {},
-        // setProducError(true)
-      )
-      .finally(() => {
-        // setProducLoading(false);
-      });
+    ]).catch(e => {
+      console.log('failed to fethc product');
+      throw e;
+    });
   }
 
   function render() {
@@ -62,26 +54,29 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
     );
 
     const container = document.createElement('div');
-    // Limpiar el contenedor antes de volver a renderizar
 
-    // Crear y agregar elementos
+    // Product name
     const productNameElem = document.createElement('p');
     productNameElem.className = 'text-2xl font-bold';
     productNameElem.textContent = product.name;
 
+    // Product description
     const productDescriptionElem = document.createElement('p');
     productDescriptionElem.className = 'pt-2 text-xs leading-5';
     productDescriptionElem.textContent = 'productDescriptionPlainTruncate';
 
+    // Product price
     const productPriceElem = document.createElement('p');
     productPriceElem.className = 'pt-2 text-3xl font-light';
     productPriceElem.textContent = `$${productListPrice} MXM`;
 
+    // laber for
     const shippingInfoElem = document.createElement('p');
     shippingInfoElem.className = 'pb-5 text-xs';
     shippingInfoElem.textContent =
       'Los gastos de envío se calculan en la pantalla de pago.';
 
+    // purchase button
     const purchaseButton = document.createElement('button');
     purchaseButton.className = `${'bg-[#f6c251]'} ${'hover:bg-yellow-600'} rounded-full h-[42px]`;
     purchaseButton.textContent = 'COMPRAR AHORA';
@@ -109,17 +104,16 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
     //   'mt-4 bg-red-500 py-3 text-center text-sm font-bold text-white';
     // outOfStockElem.textContent = '¡Producto agotado!';
 
-    //  ----------  Selector de cantidad de articulos ----------
-    // Crear texto de cantidad
+    //  ----------  Selector for amount ----------
     const quantityLabel = document.createElement('div');
     quantityLabel.className = 'text-md';
     quantityLabel.textContent = 'Cantidad:';
 
-    // Crear contenedor para los botones y el input
+    // Container
     const quantityContainer = document.createElement('div');
     quantityContainer.className = 'flex pt-2';
 
-    // Botón de restar
+    // Button rest
     const restButton = document.createElement('button');
     restButton.className =
       'block max-w-[50px] text-center transform transition duration-500 hover:scale-110 bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 px-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:stroke-slate-400 disabled:text-slate-400 disabled:hover:bg-slate-100';
@@ -131,7 +125,7 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
       quantityInput.value = quantityShoppingCart;
     });
 
-    // Input de cantidad
+    // Input
     const quantityInput = document.createElement('input');
     quantityInput.value = quantityShoppingCart;
     quantityInput.className =
@@ -141,22 +135,20 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
     quantityInput.min = 1;
     // quantityInput.disabled = !enambleEdit;
 
-    // quantityInput.addEventListener('change', e => {
-    //   addValueShoppingCart(e);
-    // });
-
+    quantityInput.addEventListener('change', e => {
+      quantityShoppingCart = e.target.value;
+    });
     quantityInput.addEventListener('wheel', e => {
       e.target.blur();
     });
+    quantityInput.addEventListener('keydown', e => {
+      const key = e.key;
+      if (['e', '-', '.'].includes(key)) {
+        e.preventDefault();
+      }
+    });
 
-    // quantityInput.addEventListener('keydown', e => {
-    //   const key = e.key;
-    //   if (['e', '-', '.'].includes(key)) {
-    //     e.preventDefault();
-    //   }
-    // });
-
-    // Botón de agregar
+    // Botton add
     const addButton = document.createElement('button');
     addButton.className =
       'block max-w-[50px] text-center transform transition duration-500 hover:scale-110 bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 px-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:stroke-slate-400 disabled:text-slate-400 disabled:hover:bg-slate-100';
@@ -173,15 +165,13 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
     quantityContainer.appendChild(quantityInput);
     quantityContainer.appendChild(addButton);
 
-    //  ----------  Selector de cantidad de articulos ----------
+    // ----------- Product variants -----------------------
 
-    // ----------- Selector de variantes -----------------------
-
-    // Crear contenedor principal
+    // container
     const containerVariants = document.createElement('div');
     containerVariants.className = `flex items-center gap-x-6`;
 
-    // Renderizar las variantes
+    // render variants
     Object.keys(allVariants).forEach((variantKey, i, arr) => {
       const currentAllVariants = allVariants[variantKey];
       const currentAvailableVariant = availableVariants[variantKey];
@@ -262,7 +252,7 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
       containerVariants.appendChild(formGroup);
     });
 
-    // Agregar elementos al contenedor
+    // Add elements to main container
     container.appendChild(productNameElem);
     container.appendChild(productDescriptionElem);
     container.appendChild(productPriceElem);
