@@ -9,7 +9,7 @@ import {
 // constants
 const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
 
-(async function () {
+async function initProduct({ mashupID, productID, shopUrl }) {
   // global variables
   let product = {};
   let subProducts = [];
@@ -18,9 +18,9 @@ const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
   let quantityShoppingCart = 1;
   let valuesVariants = {};
 
-  const mashupID = '~2RtpU94f9CnoO5a';
-  const productID = '~2m7JYMEyHDgtn';
-  const baseUrl = 'https://rocioshop.com/';
+  // const mashupID = '~2RtpU94f9CnoO5a';
+  // const productID = '~2m7JYMEyHDgtn';
+  // const shopUrl = 'https://rocioshop.com/';
 
   const root = document.getElementById('checkout-button-container');
   if (!root) {
@@ -98,7 +98,7 @@ const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
       if (queryParams.has('click_id')) {
         paramsObj.click_id = queryParams.get('click_id');
       }
-      window.location.href = `${baseUrl}${paramReplace(checkoutExpressPath, {
+      window.location.href = `${shopUrl}${paramReplace(checkoutExpressPath, {
         businessID: productBusinessID,
         productID,
       })}/?${qs.stringify(paramsObj)}`;
@@ -276,4 +276,6 @@ const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
   // execution
   await fetchProduct();
   render();
-})();
+}
+
+window.initProduct = initProduct;
