@@ -1,20 +1,26 @@
+import qs from 'qs';
 import { getProduct, getProducts } from './request/orders';
 import {
   getProductsFilteredbyValues,
-  getVariantFromSubProducts,
   getVariantsFilteredbyValues,
+  paramReplace,
 } from './utils';
+
+// constants
+const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
 
 (async function () {
   // global variables
   let product = {};
   let subProducts = [];
+  let productBusinessID = null;
 
   let quantityShoppingCart = 1;
   let valuesVariants = {};
 
   const mashupID = '~2RtpU94f9CnoO5a';
   const productID = '~2m7JYMEyHDgtn';
+  const baseUrl = 'https://rocioshop.com/';
 
   const root = document.getElementById('checkout-button-container');
   if (!root) {
@@ -27,7 +33,7 @@ import {
     return Promise.all([
       getProduct(mashupID, productID).then(r => {
         product = r;
-        // setBusinessID(r.owner);
+        productBusinessID = r.owner;
       }),
       getProducts(mashupID, {
         parent: productID,
@@ -81,7 +87,21 @@ import {
     purchaseButton.textContent = 'COMPRAR AHORA';
     // purchaseButton.disabled = loadingBtn || productAvailable === 0;
     purchaseButton.addEventListener('click', () => {
-      console.log('hola');
+      const queryParams = new URLSearchParams(window.location.search);
+      const paramsObj = { quantity: quantityShoppingCart };
+      if (queryParams.has('referral')) {
+        paramsObj.referral = queryParams.get('referral');
+      }
+      if (queryParams.has('campaign')) {
+        paramsObj.campaign = queryParams.get('campaign');
+      }
+      if (queryParams.has('click_id')) {
+        paramsObj.click_id = queryParams.get('click_id');
+      }
+      window.location.href = `${baseUrl}${paramReplace(checkoutExpressPath, {
+        businessID: productBusinessID,
+        productID,
+      })}/?${qs.stringify(paramsObj)}`;
     });
 
     // const outOfStockElem = document.createElement('p');
@@ -249,6 +269,7 @@ import {
     container.appendChild(shippingInfoElem);
     container.appendChild(containerVariants);
     container.appendChild(quantityContainer);
+    container.appendChild(purchaseButton);
 
     root.appendChild(container);
   }
