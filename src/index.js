@@ -9,7 +9,7 @@ import {
 // constants
 const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
 
-async function initProduct({ mashupID, productID, shopUrl }) {
+async function checkoutButon({ mashupID, productID, shopUrl }) {
   // global variables
   let product = {};
   let subProducts = [];
@@ -278,4 +278,4 @@ async function initProduct({ mashupID, productID, shopUrl }) {
   render();
 }
 
-window.initProduct = initProduct;
+window.checkoutButon = checkoutButon;
