@@ -78,10 +78,11 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
 
     // purchase button
     const purchaseButton = document.createElement('button');
-    purchaseButton.className = `${'bg-[#f6c251]'} ${'hover:bg-yellow-600'} rounded-full h-[42px]`;
+    purchaseButton.className = 'checkout-button-purchase-button';
     purchaseButton.textContent = 'COMPRAR AHORA';
     // purchaseButton.disabled = loadingBtn || productAvailable === 0;
     purchaseButton.addEventListener('click', () => {
+      let productId = product.id;
       const queryParams = new URLSearchParams(window.location.search);
       const paramsObj = { quantity: quantityShoppingCart };
       if (queryParams.has('referral')) {
@@ -93,9 +94,18 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
       if (queryParams.has('click_id')) {
         paramsObj.click_id = queryParams.get('click_id');
       }
+      if (subProducts) {
+        const filteredSubProduts = getProductsFilteredbyValues(
+          valuesVariants,
+          subProducts,
+        );
+
+        productId = filteredSubProduts[0].id;
+      }
+
       window.location.href = `${shopUrl}${paramReplace(checkoutExpressPath, {
         businessID: productBusinessID,
-        productID,
+        productID: productId,
       })}/?${qs.stringify(paramsObj)}`;
     });
 
@@ -115,8 +125,7 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
 
     // Button rest
     const restButton = document.createElement('button');
-    restButton.className =
-      'block max-w-[50px] text-center transform transition duration-500 hover:scale-110 bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 px-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:stroke-slate-400 disabled:text-slate-400 disabled:hover:bg-slate-100';
+    restButton.className = 'checkout-button-rest-quantity';
     restButton.title = 'Quitar';
     // restButton.disabled = !enambleEdit;
     restButton.innerHTML = '<span class="text-dark text-lg">-</span>';
@@ -128,8 +137,7 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
     // Input
     const quantityInput = document.createElement('input');
     quantityInput.value = quantityShoppingCart;
-    quantityInput.className =
-      'bg-gray-50 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block max-w-[50px] text-center p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none';
+    quantityInput.className = 'checkout-button-input-quantity';
     quantityInput.placeholder = 'cantidad';
     quantityInput.type = 'number';
     quantityInput.min = 1;
@@ -150,8 +158,7 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
 
     // Botton add
     const addButton = document.createElement('button');
-    addButton.className =
-      'block max-w-[50px] text-center transform transition duration-500 hover:scale-110 bg-gray-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 px-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:stroke-slate-400 disabled:text-slate-400 disabled:hover:bg-slate-100';
+    addButton.className = 'checkout-button-add-quantity';
     addButton.title = 'Agregar';
     // addButton.disabled = !enambleEdit;
     addButton.innerHTML = '<span class="text-dark text-lg">+</span>';
@@ -169,7 +176,7 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
 
     // container
     const containerVariants = document.createElement('div');
-    containerVariants.className = `flex items-center gap-x-6`;
+    containerVariants.className = `checkout-button-container`;
 
     // render variants
     Object.keys(allVariants).forEach((variantKey, i, arr) => {
