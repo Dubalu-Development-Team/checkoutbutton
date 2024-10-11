@@ -9,7 +9,7 @@ import {
 // constants
 const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
 
-async function checkoutButon({ mashupID, productID, shopUrl }) {
+async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
   // global variables
   let product = {};
   let subProducts = [];
@@ -18,7 +18,7 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
   let quantityShoppingCart = 1;
   let valuesVariants = {};
 
-  const root = document.getElementById('checkout-button-container');
+  const root = document.getElementById(containerID);
   if (!root) {
     throw new Error('element whit id checkout-button-container not found');
   }
@@ -39,7 +39,7 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
         subProducts = r.results;
       }),
     ]).catch(e => {
-      console.log('failed to fethc product');
+      console.error('failed to fetch product');
       throw e;
     });
   }
@@ -80,7 +80,6 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
     const purchaseButton = document.createElement('button');
     purchaseButton.className = 'checkout-button-purchase-button';
     purchaseButton.textContent = 'COMPRAR AHORA';
-    // purchaseButton.disabled = loadingBtn || productAvailable === 0;
     purchaseButton.addEventListener('click', () => {
       let productId = product.id;
       const queryParams = new URLSearchParams(window.location.search);
@@ -94,7 +93,7 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
       if (queryParams.has('click_id')) {
         paramsObj.click_id = queryParams.get('click_id');
       }
-      if (subProducts) {
+      if (subProducts && subProducts.length) {
         const filteredSubProduts = getProductsFilteredbyValues(
           valuesVariants,
           subProducts,
@@ -243,12 +242,6 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
           productPriceElem.textContent = subProductPrice;
           productListPrice = subProductPrice;
         }
-        // onSelectVariant(
-        //   {
-        //     [variantKey]: e.target.value,
-        //   },
-        //   currentAvailableVariant.includes(e.target.value),
-        // );
       });
 
       // Agregar etiqueta y select al grupo de formulario
@@ -275,4 +268,4 @@ async function checkoutButon({ mashupID, productID, shopUrl }) {
   render();
 }
 
-window.checkoutButon = checkoutButon;
+window.checkoutButton = checkoutButton;
