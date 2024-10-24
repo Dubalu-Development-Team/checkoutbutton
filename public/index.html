@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <meta charset="utf-8" />
     <title>Dubalu</title>
   </head>
   <body>
-    <div style="background-color: #272822; padding: 10px; border-radius: 5px">
-      <pre><code>
-        <span style="color: #f92672;">&lt;head&gt;</span><br>
-        <span style="color: #75715e;">&lt;!-- Import the library with script tag --&gt;</span><br>
-        &nbsp;&nbsp;<span style="color: #f92672;">&lt;script</span> <span style="color: #a6e22e;">src=</span><span style="color: #e6db74;">"main.js"</span><span style="color: #f92672;">&gt;</span><span style="color: #f92672;">&lt;/script&gt;</span><br>
-        <span style="color: #f92672;">&lt;/head&gt;</span>
-      </code></pre>
-    </div>
+    <header class="pt-25 pb-25">
+      <div class="flex items-center justify-content-center gap-1">
+        <p class="text-xs">v.0.1.0</p>
+        <a aria-label="View website repository on GitHub" href="https://github.com/Dubalu-Development-Team/checkoutbutton" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" class="size-4" data-astro-cid-j7pv25f6=""><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"></path></svg>
+        </a>
+      </div>
+      <h1 class="text-xl font-black text-center mb-0">Checkout functionality for Dubalu's ecosystem</h1>
+      <p class="opacity-7 text-center">Dubalu Javascript library</p>
+    </header>
+    <main>
+      <div class="code-box flex mb-1">
+        <pre><code>
+          <span class="text-red-light">&lt;head&gt;</span>
+          <span class="text-grey-light">&lt;!-- Import the library with script tag --&gt;</span>
+          <span class="text-red-light">&lt;script</span> <span style="color: #a6e22e;">src=</span><span style="color: #e6db74;">"main.js"</span><span class="text-red-light">&gt;</span><span class="text-red-light">&lt;/script&gt;</span>
+          <span class="text-red-light">&lt;/head&gt;</span>
+        </code></pre>
+      </div>
+      <div class="code-box flex mb-1">
+        <pre><code>
+          <span class="text-grey-light">&lt;!-- Body section --&gt;</span>
+          <span class="text-red-light">&lt;body&gt;</span>
+          &nbsp;&nbsp;<span class="text-grey-light">&lt;!-- Aquí va el contenido --&gt;</span>
+          &nbsp;&nbsp;<span class="text-red-light">&lt;div&nbsp;</span><span style="color: #a6e22e;">id=</span><span style="color: #e6db74;">"root"</span><span class="text-red-light">&gt;</span>
+          &nbsp;&nbsp;<span class="text-red-light">&lt;/div&gt;</span>
+          <span class="text-red-light">&lt;/body&gt;</span>
+        </code></pre>
+      </div>
 
-    <div
-      style="
-        background-color: #272822;
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-      "
-    >
-      <pre><code>
-        <span style="color: #75715e;">&lt;!-- Body section --&gt;</span><br>
-        <span style="color: #f92672;">&lt;body&gt;</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #75715e;">&lt;!-- Aquí va el contenido --&gt;</span><br>
-        &nbsp;&nbsp;<span style="color: #f92672;">&lt;div</span> <span style="color: #a6e22e;">id=</span><span style="color: #e6db74;">"root"</span><span style="color: #f92672;">&gt;</span><br>
-        &nbsp;&nbsp;<span style="color: #f92672;">&lt;/div&gt;</span><br>
-        <span style="color: #f92672;">&lt;/body&gt;</span>
-      </code></pre>
-    </div>
+      <div class="code-box flex">
+        <pre><code>
+      <span class="text-red-light">&lt;body&gt;</span>
+      &nbsp;&nbsp;<span style="color: #196fca;">checkoutButton</span><span class="text-grey-light">({</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">containerID:</span> <span style="color: #e6db74;">'root'</span>, <span class="text-grey-light">&lt;!-- ID del contenedor donde se cargará la biblioteca --&gt;</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">shopUrl:</span> <span style="color: #e6db74;">'https://rocioshop.com/'</span>, <span class="text-grey-light">&lt;!-- URL de la tienda --&gt;</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">mashupID:</span> <span style="color: #e6db74;">'~2RtpU94f9CnoO5a'</span>, <span class="text-grey-light">&lt;!-- ID del mashup específico --&gt;</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">productID:</span> <span style="color: #e6db74;">'~BCGzWCEVJ2cq'</span>, <span class="text-grey-light">&lt;!-- ID del producto --&gt;</span>
+      &nbsp;&nbsp;<span class="text-grey-light">});</span>
+      <span class="text-red-light">&lt;/body&gt;</span>
+    </code></pre>
+      </div>
 
-    <div
-      style="
-        background-color: #272822;
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-      "
-    >
-      <pre><code>
-    <span style="color: #f92672;">&lt;body&gt;</span><br>
-    <span style="color: #75715e;">&lt;!-- Your body content --&gt;</span><br>
-    &nbsp;&nbsp;<span style="color: #196fca;">checkoutButton</span><span style="color: #75715e;">({</span><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">containerID:</span> <span style="color: #e6db74;">'root'</span>, <span style="color: #75715e;">&lt;!-- ID del contenedor donde se cargará la biblioteca --&gt;</span><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">shopUrl:</span> <span style="color: #e6db74;">'https://rocioshop.com/'</span>, <span style="color: #75715e;">&lt;!-- URL de la tienda --&gt;</span><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">mashupID:</span> <span style="color: #e6db74;">'~2RtpU94f9CnoO5a'</span>, <span style="color: #75715e;">&lt;!-- ID del mashup específico --&gt;</span><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">productID:</span> <span style="color: #e6db74;">'~BCGzWCEVJ2cq'</span>, <span style="color: #75715e;">&lt;!-- ID del producto --&gt;</span><br>
-    &nbsp;&nbsp;<span style="color: #75715e;">});</span><br>
-    <span style="color: #f92672;">&lt;/body&gt;</span>
-  </code></pre>
-    </div>
-
-    <div id="root" />
+      <div id="root" />
+    </main>
     <script>
       checkoutButton({
         containerID: 'root',
