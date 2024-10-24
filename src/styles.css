@@ -11,6 +11,8 @@
     --light-color: #fff;
     --red-light: #f92672;
     --grey-light: #75715e;
+    --yellow-light: #a6e22e;
+    --dub-color: #ff6b00;
 } 
 html {
     font-family: "Roboto", sans-serif;
@@ -53,11 +55,17 @@ html {
         .mt-25 {
             margin-top: 2.5rem;
         }
+        .pt-5 {
+            padding-top: .5rem;
+        }
         .pt-25 {
             padding-top: 2.5rem;
         }
         .pb-25 {
             padding-bottom: 2.5rem;
+        }
+        .pb-5 {
+            padding-bottom: .5rem;
         }
         .flex {
             display: flex;
@@ -74,11 +82,20 @@ html {
         .gap-1 {
             gap: 1rem;
         }
+        .line-height-1 {
+            line-height: 1.1;
+        }
         .text-red-light {
             color: var(--red-light);
         }
         .text-grey-light {
             color: var(--grey-light);
+        }
+        .text-yellow-light {
+            color: var(--yellow-light);
+        }
+        .text-dub {
+            color: var(--dub-color);
         }
         .text-center {
             text-align: center;
