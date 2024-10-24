@@ -124,6 +124,14 @@ html {
         .font-black {
             font-weight: 900;
         }
+        .w-12 {
+            width: 1.2rem;
+        }
+        svg { fill: #FF6B00; }
+
+        @media (prefers-color-scheme: dark) {
+            svg { fill: #FFF; }
+        }
         main {
             margin: auto;
             padding: 1rem;
