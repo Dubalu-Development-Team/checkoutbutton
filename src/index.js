@@ -6,6 +6,7 @@ import {
   paramReplace,
 } from './utils';
 
+import styles from './styles.css';
 // constants
 const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
 
