@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
+    <meta name="theme-color" content="#0099ff">
+    <meta name="og:title" content="Tailwind CSS Animations Plugin: Community-Powered Animation Magic">
+    <meta name="og:description" content="Tailwind plugin to add easily animations to your website">
+    <meta name="og:image" content="favicon.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Checkout functionality for Dubalu's ecosystem</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <meta charset="utf-8" />
-    <title>Dubalu</title>
   </head>
   <body>
     <header class="pt-25 pb-25">
@@ -41,18 +47,18 @@
 
       <div class="code-box flex">
         <pre><code>
-      <span class="text-red-light">&lt;body&gt;</span>
-      &nbsp;&nbsp;<span style="color: #196fca;">checkoutButton</span><span class="text-grey-light">({</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">containerID:</span> <span style="color: #e6db74;">'root'</span>, <span class="text-grey-light">&lt;!-- ID del contenedor donde se cargará la biblioteca --&gt;</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">shopUrl:</span> <span style="color: #e6db74;">'https://rocioshop.com/'</span>, <span class="text-grey-light">&lt;!-- URL de la tienda --&gt;</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">mashupID:</span> <span style="color: #e6db74;">'~2RtpU94f9CnoO5a'</span>, <span class="text-grey-light">&lt;!-- ID del mashup específico --&gt;</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">productID:</span> <span style="color: #e6db74;">'~BCGzWCEVJ2cq'</span>, <span class="text-grey-light">&lt;!-- ID del producto --&gt;</span>
-      &nbsp;&nbsp;<span class="text-grey-light">});</span>
-      <span class="text-red-light">&lt;/body&gt;</span>
-    </code></pre>
+          <span class="text-red-light">&lt;body&gt;</span>
+          &nbsp;&nbsp;<span style="color: #196fca;">checkoutButton</span><span class="text-grey-light">({</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">containerID:</span> <span style="color: #e6db74;">'root'</span>, <span class="text-grey-light">&lt;!-- ID del contenedor donde se cargará la biblioteca --&gt;</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">shopUrl:</span> <span style="color: #e6db74;">'https://rocioshop.com/'</span>, <span class="text-grey-light">&lt;!-- URL de la tienda --&gt;</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">mashupID:</span> <span style="color: #e6db74;">'~2RtpU94f9CnoO5a'</span>, <span class="text-grey-light">&lt;!-- ID del mashup específico --&gt;</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #a6e22e;">productID:</span> <span style="color: #e6db74;">'~BCGzWCEVJ2cq'</span>, <span class="text-grey-light">&lt;!-- ID del producto --&gt;</span>
+          &nbsp;&nbsp;<span class="text-grey-light">});</span>
+          <span class="text-red-light">&lt;/body&gt;</span>
+        </code></pre>
       </div>
 
-      <div id="root" />
+      <div id="root"></div>
     </main>
     <script>
       checkoutButton({
