@@ -8,6 +8,7 @@
     --dark-color: #1f1f1f;
     --dark-bg-color: #28292a;
     --dark-text-color: #D4D4D4;
+    --dark-border-color: #30363d;
     --light-color: #fff;
     --red-light: #f92672;
     --grey-light: #75715e;
@@ -150,10 +151,16 @@ html {
 }
 
 :root {
+    --dark-bg-color: #28292a;
+    --dark-border-color: #30363d;    
+    --dark-text-color: rgba(255, 255, 255, .6);
+    --light-text-color: #333;
     --red-color: #ef4444;
+    --dub-color: #ff6b00;
 }
 
 .dub-item {
+    color: light-dark(#666, var(--dark-text-color));
     .dub-item-name {
         font-size: 1.5rem;
         line-height: 2rem;
@@ -177,11 +184,11 @@ html {
     }
     .dub-item-variant-select {
         display: block;
-        background-color: #f9fafb;
+        background-color: light-dark(#f9fafb, #28292a);
         font-size: .875rem;
         line-height: 1.25rem;
         padding: .625rem;
-        border: 1px solid #d1d5db;
+        border: 1px solid light-dark(#d1d5db, var(--dark-border-color));
         border-radius: .5rem;
         appearance: none;
     }
@@ -193,11 +200,11 @@ html {
         }
         .dub-item-quantity-add,
         .dub-item-quantity-remove {
-            background-color: #f1f5f9;
+            background-color: light-dark(#f1f5f9, #28292a);
             color: #94a3b8;
             text-align: center;
             padding: .5rem 1rem 0;
-            border: 1px solid #d1d5db;
+            border: 1px solid light-dark(#d1d5db, var(--dark-border-color));
             border-radius: .5rem;
             max-width: 50px;
             span {
@@ -205,6 +212,14 @@ html {
                 line-height: 1.75rem;
             }
         }
+    }
+    .dub-item-button {
+        background: light-dark(var(--dub-color), var(--dark-bg-color));
+        color: light-dark(var(--light-text-color), var(--dark-text-color));
+        font-size: .875rem;
+        padding: .5rem 1.5rem;
+        border-radius: 4rem;
+        white-space: nowrap;
     }
     .text-error {
         color: var(--red-color);
