@@ -21,7 +21,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
 
   const root = document.getElementById(containerID);
   if (!root) {
-    throw new Error('element whit id checkout-button-container not found');
+    throw new Error(`element whit id ${containerID} not found`);
   }
 
   root.innerHTML = '';
@@ -47,6 +47,9 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
 
   function render() {
     let productListPrice = product.list_price || 0;
+    let productDescription = product.plain_description;
+    let productPhotos = product.photos;
+    const initialDisableStatus = subProducts.length > 0;
 
     const allVariants = getVariantsFilteredbyValues({}, subProducts);
     const availableVariants = getVariantsFilteredbyValues(
@@ -64,7 +67,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     // Product description
     const productDescriptionElem = document.createElement('p');
     productDescriptionElem.className = 'dub-item-description';
-    productDescriptionElem.textContent = product.plain_description.substring(0, 260);
+    productDescriptionElem.textContent = productDescription.substring(0, 260);
 
     // Product price
     const productPriceElem = document.createElement('p');
@@ -127,7 +130,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     const restButton = document.createElement('button');
     restButton.className = 'dub-item-quantity-remove';
     restButton.title = 'Quitar';
-    // restButton.disabled = !enambleEdit;
+    restButton.disabled = initialDisableStatus;
     restButton.innerHTML = '<span>-</span>';
     restButton.addEventListener('click', e => {
       quantityShoppingCart -= 1;
@@ -141,8 +144,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     quantityInput.placeholder = 'cantidad';
     quantityInput.type = 'number';
     quantityInput.min = 1;
-    // quantityInput.disabled = !enambleEdit;
-
+    quantityInput.disabled = initialDisableStatus;
     quantityInput.addEventListener('change', e => {
       quantityShoppingCart = e.target.value;
     });
@@ -160,7 +162,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     const addButton = document.createElement('button');
     addButton.className = 'dub-item-quantity-add';
     addButton.title = 'Agregar';
-    // addButton.disabled = !enambleEdit;
+    addButton.disabled = initialDisableStatus;
     addButton.innerHTML = '<span>+</span>';
     addButton.addEventListener('click', e => {
       quantityShoppingCart += 1;
@@ -171,6 +173,12 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     quantityContainer.appendChild(restButton);
     quantityContainer.appendChild(quantityInput);
     quantityContainer.appendChild(addButton);
+
+    // ----------- Product image -----------------------\
+    const imageContainer = document.createElement('div');
+    const image = document.createElement('img');
+    image.src = productPhotos[0];
+    imageContainer.appendChild(image);
 
     // ----------- Product variants -----------------------
 
@@ -235,6 +243,10 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
           subProducts,
         );
 
+        const subProductPhotos = filteredSubProduts[0].photos;
+        image.src = subProductPhotos[0];
+        productPhotos = subProductPhotos;
+
         if (
           filteredSubProduts.length === 1 &&
           Object.values(valuesVariants).length === arr.length
@@ -242,6 +254,18 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
           const subProductPrice = filteredSubProduts[0].list_price;
           productPriceElem.textContent = `$${productListPrice} MXM`;
           productListPrice = subProductPrice;
+        }
+
+        // Verificar si se han seleccionado todas las variantes necesarias
+        const allSelected = Object.keys(allVariants).every(
+          key => valuesVariants[key],
+        );
+
+        // Habilitar controles de cantidad si todas las variantes están seleccionadas
+        if (allSelected) {
+          restButton.disabled = false;
+          quantityInput.disabled = false;
+          addButton.disabled = false;
         }
       });
 
@@ -261,6 +285,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     container.appendChild(containerVariants);
     container.appendChild(quantityContainer);
     container.appendChild(purchaseButton);
+    container.appendChild(imageContainer);
 
     root.appendChild(container);
   }
