@@ -182,9 +182,10 @@ async function checkoutButton({
 
     // ----------- Product image -----------------------\
     let imageContainer = null;
+    let image = null;
     if (showImage) {
       imageContainer = document.createElement('div');
-      const image = document.createElement('img');
+      image = document.createElement('img');
       image.src = productPhotos[0];
       imageContainer.appendChild(image);
     }
@@ -252,9 +253,11 @@ async function checkoutButton({
           subProducts,
         );
 
-        const subProductPhotos = filteredSubProduts[0].photos;
-        image.src = subProductPhotos[0];
-        productPhotos = subProductPhotos;
+        if (image) {
+          const subProductPhotos = filteredSubProduts[0].photos;
+          image.src = subProductPhotos[0];
+          productPhotos = subProductPhotos;
+        }
 
         if (
           filteredSubProduts.length === 1 &&
