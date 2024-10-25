@@ -181,8 +181,9 @@ async function checkoutButton({
     quantityContainer.appendChild(addButton);
 
     // ----------- Product image -----------------------\
+    let imageContainer = null;
     if (showImage) {
-      const imageContainer = document.createElement('div');
+      imageContainer = document.createElement('div');
       const image = document.createElement('img');
       image.src = productPhotos[0];
       imageContainer.appendChild(image);
@@ -293,7 +294,7 @@ async function checkoutButton({
     container.appendChild(containerVariants);
     container.appendChild(quantityContainer);
     container.appendChild(purchaseButton);
-    if (showImage) {
+    if (imageContainer) {
       container.appendChild(imageContainer);
     }
 
