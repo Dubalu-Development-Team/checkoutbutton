@@ -224,7 +224,7 @@ html {
             }
         }
         .dub-item-quantity-input {
-            background-color: #f9fafb;
+            background-color: light-dark(#f9fafb, var(--dark-bg-color));
             -moz-appearance: textfield;
             appearance: textfield;
             max-width: 50px;
