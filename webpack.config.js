@@ -21,6 +21,7 @@ module.exports = {
       scriptLoading: 'blocking',
       inject: 'head',
       template: path.resolve(__dirname, 'public', 'index.html'),
+      favicon: path.resolve(__dirname, 'public', 'favicon.svg'),
     }),
     new MiniCssExtractPlugin(),
   ],
