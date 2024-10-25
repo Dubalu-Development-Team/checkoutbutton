@@ -55,7 +55,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     );
 
     const container = document.createElement('div');
-    productNameElem.className = 'dub-item';
+    container.className = 'dub-item';
     // Product name
     const productNameElem = document.createElement('p');
     productNameElem.className = 'dub-item-name';
@@ -79,7 +79,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
 
     // purchase button
     const purchaseButton = document.createElement('button');
-    purchaseButton.className = 'checkout-button-purchase-button';
+    purchaseButton.className = 'dub-item-button checkout-button-purchase-button';
     purchaseButton.textContent = 'COMPRAR AHORA';
     purchaseButton.addEventListener('click', () => {
       let productId = product.id;
