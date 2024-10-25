@@ -10,7 +10,13 @@ import styles from './styles.css';
 // constants
 const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
 
-async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
+async function checkoutButton({
+  mashupID,
+  productID,
+  shopUrl,
+  containerID,
+  showImage,
+}) {
   // global variables
   let product = {};
   let subProducts = [];
@@ -175,10 +181,12 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     quantityContainer.appendChild(addButton);
 
     // ----------- Product image -----------------------\
-    const imageContainer = document.createElement('div');
-    const image = document.createElement('img');
-    image.src = productPhotos[0];
-    imageContainer.appendChild(image);
+    if (showImage) {
+      const imageContainer = document.createElement('div');
+      const image = document.createElement('img');
+      image.src = productPhotos[0];
+      imageContainer.appendChild(image);
+    }
 
     // ----------- Product variants -----------------------
 
@@ -285,7 +293,9 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     container.appendChild(containerVariants);
     container.appendChild(quantityContainer);
     container.appendChild(purchaseButton);
-    container.appendChild(imageContainer);
+    if (showImage) {
+      container.appendChild(imageContainer);
+    }
 
     root.appendChild(container);
   }
