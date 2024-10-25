@@ -240,7 +240,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
           Object.values(valuesVariants).length === arr.length
         ) {
           const subProductPrice = filteredSubProduts[0].list_price;
-          productPriceElem.textContent = subProductPrice;
+          productPriceElem.textContent = `$${productListPrice} MXM`;
           productListPrice = subProductPrice;
         }
       });
