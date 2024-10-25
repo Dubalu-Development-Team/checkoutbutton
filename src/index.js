@@ -55,25 +55,25 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     );
 
     const container = document.createElement('div');
-
+    productNameElem.className = 'dub-item';
     // Product name
     const productNameElem = document.createElement('p');
-    productNameElem.className = 'text-2xl font-bold';
+    productNameElem.className = 'dub-item-name';
     productNameElem.textContent = product.name;
 
     // Product description
     const productDescriptionElem = document.createElement('p');
-    productDescriptionElem.className = 'pt-2 text-xs leading-5';
+    productDescriptionElem.className = 'dub-item-description';
     productDescriptionElem.textContent = 'productDescriptionPlainTruncate';
 
     // Product price
     const productPriceElem = document.createElement('p');
-    productPriceElem.className = 'pt-2 text-3xl font-light';
+    productPriceElem.className = 'dub-item-price';
     productPriceElem.textContent = `$${productListPrice} MXM`;
 
     // laber for
     const shippingInfoElem = document.createElement('p');
-    shippingInfoElem.className = 'pb-5 text-xs';
+    shippingInfoElem.className = 'dub-item-legend';
     shippingInfoElem.textContent =
       'Los gastos de envío se calculan en la pantalla de pago.';
 
