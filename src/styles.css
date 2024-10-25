@@ -149,3 +149,65 @@ html {
     }
 }
 
+:root {
+    --red-color: #ef4444;
+}
+
+.dub-item {
+    .dub-item-name {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        font-weight: bold;
+    }
+    .dub-item-description {
+        font-size: .75rem;
+        line-height: 1.25rem;
+        padding-top: .5rem;
+    }
+    .dub-item-price {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        font-weight: 300;
+        padding-top: .5rem;
+    }
+    .dub-item-legend {
+        font-size: .75rem;
+        line-height: 1rem;
+        padding-bottom: 1.25rem;
+    }
+    .dub-item-variant-select {
+        display: block;
+        background-color: #f9fafb;
+        font-size: .875rem;
+        line-height: 1.25rem;
+        padding: .625rem;
+        border: 1px solid #d1d5db;
+        border-radius: .5rem;
+        appearance: none;
+    }
+    .dub-item-quantity {
+        display: flex;
+        .dub-item-quantity-name {
+            font-size: .875rem;
+            line-height: 1.25rem;
+        }
+        .dub-item-quantity-add,
+        .dub-item-quantity-remove {
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            text-align: center;
+            padding: .5rem 1rem 0;
+            border: 1px solid #d1d5db;
+            border-radius: .5rem;
+            max-width: 50px;
+            span {
+                font-size: 1.125rem;
+                line-height: 1.75rem;
+            }
+        }
+    }
+    .text-error {
+        color: var(--red-color);
+    }
+}
+

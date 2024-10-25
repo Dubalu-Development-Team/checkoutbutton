@@ -79,7 +79,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
 
     // purchase button
     const purchaseButton = document.createElement('button');
-    purchaseButton.className = 'dub-item-button checkout-button-purchase-button';
+    purchaseButton.className = 'dub-item-button';
     purchaseButton.textContent = 'COMPRAR AHORA';
     purchaseButton.addEventListener('click', () => {
       let productId = product.id;
@@ -116,19 +116,19 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
 
     //  ----------  Selector for amount ----------
     const quantityLabel = document.createElement('div');
-    quantityLabel.className = 'text-md';
+    quantityLabel.className = 'dub-item-quantity-name';
     quantityLabel.textContent = 'Cantidad:';
 
     // Container
     const quantityContainer = document.createElement('div');
-    quantityContainer.className = 'flex pt-2';
+    quantityContainer.className = 'dub-item-quantity';
 
     // Button rest
     const restButton = document.createElement('button');
-    restButton.className = 'checkout-button-rest-quantity';
+    restButton.className = 'dub-item-quantity-remove';
     restButton.title = 'Quitar';
     // restButton.disabled = !enambleEdit;
-    restButton.innerHTML = '<span class="text-dark text-lg">-</span>';
+    restButton.innerHTML = '<span>-</span>';
     restButton.addEventListener('click', e => {
       quantityShoppingCart -= 1;
       quantityInput.value = quantityShoppingCart;
@@ -137,7 +137,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     // Input
     const quantityInput = document.createElement('input');
     quantityInput.value = quantityShoppingCart;
-    quantityInput.className = 'checkout-button-input-quantity';
+    quantityInput.className = 'dub-item-quantity-input';
     quantityInput.placeholder = 'cantidad';
     quantityInput.type = 'number';
     quantityInput.min = 1;
@@ -158,10 +158,10 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
 
     // Botton add
     const addButton = document.createElement('button');
-    addButton.className = 'checkout-button-add-quantity';
+    addButton.className = 'dub-item-quantity-add';
     addButton.title = 'Agregar';
     // addButton.disabled = !enambleEdit;
-    addButton.innerHTML = '<span class="text-dark text-lg">+</span>';
+    addButton.innerHTML = '<span>+</span>';
     addButton.addEventListener('click', e => {
       quantityShoppingCart += 1;
       quantityInput.value = quantityShoppingCart;
@@ -201,9 +201,9 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
 
       // Crear select
       const select = document.createElement('select');
-      select.className = `bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${
+      select.className = `dub-item-variant-select ${
         // addToCartError
-        false && !valuesVariants[variantKey] ? 'text-red-500' : ''
+        false && !valuesVariants[variantKey] ? 'text-error' : ''
       }`;
       select.name = `select_${variantKey}`;
       select.id = `select_${variantKey}`;
