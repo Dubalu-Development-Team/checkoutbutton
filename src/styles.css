@@ -182,6 +182,10 @@ html {
         line-height: 1rem;
         padding-bottom: 1.25rem;
     }
+    .dub-item-variant-container {
+        padding-top: .75rem;
+        padding-bottom: 1.25rem;
+    }
     .dub-item-variant-select {
         display: block;
         background-color: light-dark(#f9fafb, #28292a);
@@ -194,6 +198,7 @@ html {
     }
     .dub-item-quantity {
         display: flex;
+        padding-bottom: 1.75rem;
         .dub-item-quantity-name {
             font-size: .875rem;
             line-height: 1.25rem;
@@ -212,6 +217,19 @@ html {
                 line-height: 1.75rem;
             }
         }
+        .dub-item-quantity-input {
+            -moz-appearance: textfield;
+            appearance: textfield;
+            max-width: 50px;
+            text-align: center;
+            border: none;
+            &:-webkit-outer-spin-button,
+            &:-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                appearance: none;
+                margin: 0;
+            }
+        }
     }
     .dub-item-button {
         background: light-dark(var(--dub-color), var(--dark-bg-color));
@@ -220,6 +238,7 @@ html {
         padding: .5rem 1.5rem;
         border-radius: 4rem;
         white-space: nowrap;
+        border: 1px solid var(--dark-border-color);
     }
     .text-error {
         color: var(--red-color);

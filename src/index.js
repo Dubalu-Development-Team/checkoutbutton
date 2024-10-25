@@ -176,7 +176,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
 
     // container
     const containerVariants = document.createElement('div');
-    containerVariants.className = `checkout-button-container`;
+    containerVariants.className = `dub-item-variant-container`;
 
     // render variants
     Object.keys(allVariants).forEach((variantKey, i, arr) => {
