@@ -17,6 +17,12 @@ async function checkoutButton({
   containerID,
   showImage,
 }) {
+const MXPrice = new Intl.NumberFormat('es-MX', {
+  style: 'currency',
+  currency: 'MXN',
+})
+
+async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
   // global variables
   let product = {};
   let subProducts = [];
@@ -77,8 +83,9 @@ async function checkoutButton({
 
     // Product price
     const productPriceElem = document.createElement('p');
+    const productListPriceWithFormat = MXPrice.format(productListPrice)
     productPriceElem.className = 'dub-item-price';
-    productPriceElem.textContent = `$${productListPrice} MXM`;
+    productPriceElem.textContent = productListPriceWithFormat;
 
     // laber for
     const shippingInfoElem = document.createElement('p');
@@ -309,3 +316,4 @@ async function checkoutButton({
 }
 
 window.checkoutButton = checkoutButton;
+}
