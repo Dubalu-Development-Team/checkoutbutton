@@ -64,7 +64,7 @@ async function checkoutButton({ mashupID, productID, shopUrl, containerID }) {
     // Product description
     const productDescriptionElem = document.createElement('p');
     productDescriptionElem.className = 'dub-item-description';
-    productDescriptionElem.textContent = 'productDescriptionPlainTruncate';
+    productDescriptionElem.textContent = product.description;
 
     // Product price
     const productPriceElem = document.createElement('p');

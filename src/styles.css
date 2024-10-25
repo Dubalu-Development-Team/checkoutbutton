@@ -204,6 +204,7 @@ html {
     }
     .dub-item-quantity {
         display: flex;
+        gap: .5rem;
         padding-bottom: 1.75rem;
         .dub-item-quantity-name {
             font-size: .875rem;
@@ -230,6 +231,7 @@ html {
             max-width: 50px;
             text-align: center;
             border: none;
+            border-radius: .5rem;
             &::-webkit-outer-spin-button,
             &::-webkit-inner-spin-button {
                 -webkit-appearance: none;
