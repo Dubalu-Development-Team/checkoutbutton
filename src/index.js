@@ -68,8 +68,15 @@ async function checkoutButton({
       subProducts,
     );
 
+    const mainContainer = document.createElement('div');
+    mainContainer.className = `dub-item ${showImage ? 'grid grid-2 gap-2' : null}`;
+
     const container = document.createElement('div');
-    container.className = 'dub-item';
+    container.className = 'dub-item-content';
+
+    const imgContainer = document.createElement('div');
+    imgContainer.className = 'dub-item-img';
+
     // Product name
     const productNameElem = document.createElement('p');
     productNameElem.className = 'dub-item-name';
@@ -84,7 +91,7 @@ async function checkoutButton({
     const productPriceElem = document.createElement('p');
     const productListPriceWithFormat = MXPrice.format(productListPrice);
     productPriceElem.className = 'dub-item-price';
-    productPriceElem.textContent = productListPriceWithFormat;
+    productPriceElem.textContent = `${productListPriceWithFormat} MXN`;
 
     // laber for
     const shippingInfoElem = document.createElement('p');
@@ -193,6 +200,7 @@ async function checkoutButton({
       imageContainer = document.createElement('div');
       image = document.createElement('img');
       image.src = productPhotos[0];
+      image.width = '500';
       imageContainer.appendChild(image);
     }
 
@@ -304,10 +312,13 @@ async function checkoutButton({
     container.appendChild(quantityContainer);
     container.appendChild(purchaseButton);
     if (imageContainer) {
-      container.appendChild(imageContainer);
+      imgContainer.appendChild(imageContainer);
     }
 
-    root.appendChild(container);
+    mainContainer.appendChild(imgContainer);
+    mainContainer.appendChild(container);
+
+    root.appendChild(mainContainer);
   }
   // execution
   await fetchProduct();
