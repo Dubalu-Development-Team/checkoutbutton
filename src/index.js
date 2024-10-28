@@ -278,7 +278,7 @@ async function checkoutButton({
           Object.values(valuesVariants).length === arr.length
         ) {
           const subProductPrice = filteredSubProduts[0].list_price;
-          productPriceElem.textContent = `$${productListPrice} MXM`;
+          productPriceElem.textContent = `${MXPrice.format(productListPrice)} MXN`;
           productListPrice = subProductPrice;
         }
 
