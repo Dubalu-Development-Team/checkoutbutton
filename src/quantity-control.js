@@ -8,6 +8,7 @@ export class QuantityControl {
   render() {
     const quantityContainer = document.createElement('div');
     quantityContainer.className = 'dub-item-quantity';
+
     const quantityLabel = document.createElement('div');
     quantityLabel.className = 'dub-item-quantity-name';
     quantityLabel.textContent = 'Cantidad:';
@@ -27,11 +28,21 @@ export class QuantityControl {
     addButton.addEventListener('click', () => this.updateQuantity(1));
 
     this.quantityInput = document.createElement('input');
+    this.quantityInput.className = 'dub-item-quantity-input';
     this.quantityInput.value = this.quantity;
     this.quantityInput.disabled = this.disabled;
     this.quantityInput.addEventListener('change', e =>
       this.setQuantity(e.target.value),
     );
+    this.quantityInput.addEventListener('wheel', e => {
+      e.target.blur();
+    });
+    this.quantityInput.addEventListener('keydown', e => {
+      const key = e.key;
+      if (['e', '-', '.'].includes(key)) {
+        e.preventDefault();
+      }
+    });
 
     // quantityContainer.appendChild(quantityLabel);
     quantityContainer.appendChild(restButton);

@@ -7,114 +7,24 @@ export class VariantSelector {
     this.onChange = onChange;
   }
 
-  //  // container
-  //  const containerVariants = document.createElement('div');
-  //  containerVariants.className = `dub-item-variant-container`;
-
-  //  // render variants
-  //  Object.keys(allVariants).forEach((variantKey, i, arr) => {
-  //    const currentAllVariants = allVariants[variantKey];
-  //    const currentAvailableVariant = availableVariants[variantKey];
-
-  //    // Crear grupo de formulario
-  //    const formGroup = document.createElement('div');
-  //    formGroup.id = `FormGroup-${variantKey}`;
-
-  //    // Crear etiqueta
-  //    const label = document.createElement('label');
-  //    label.htmlFor = `select_${variantKey}`;
-  //    // label.className =
-  //    //   addToCartError && !valuesVariants[variantKey]
-  //    //     ? 'text-capitalize text-danger'
-  //    //     : '';
-
-  //    // if (showLabelSelect) {
-  //    label.textContent = variantKey;
-  //    // }
-
-  //    // Crear select
-  //    const select = document.createElement('select');
-  //    select.className = `dub-item-variant-select ${
-  //      // addToCartError
-  //      false && !valuesVariants[variantKey] ? 'text-error' : ''
-  //    }`;
-  //    select.name = `select_${variantKey}`;
-  //    select.id = `select_${variantKey}`;
-  //    select.value = valuesVariants[variantKey] || '';
-
-  //    // Opción deshabilitada
-  //    const defaultOption = document.createElement('option');
-  //    defaultOption.disabled = true;
-  //    defaultOption.value = '';
-  //    defaultOption.textContent = variantKey;
-  //    select.appendChild(defaultOption);
-
-  //    // Crear opciones
-  //    currentAllVariants.forEach(variantValue => {
-  //      const option = document.createElement('option');
-  //      option.value = variantValue;
-  //      option.textContent = variantValue;
-  //      option.disabled =
-  //        !currentAvailableVariant.includes(variantValue) &&
-  //        !valuesVariants[variantKey];
-  //      select.appendChild(option);
-  //    });
-
-  //    // Manejar el cambio en el select
-  //    select.addEventListener('change', e => {
-  //      valuesVariants[variantKey] = e.target.value;
-  //      const filteredSubProduts = getProductsFilteredbyValues(
-  //        valuesVariants,
-  //        subProducts,
-  //      );
-
-  //      if (image) {
-  //        const subProductPhotos = filteredSubProduts[0].photos;
-  //        image.src = subProductPhotos[0];
-  //        productPhotos = subProductPhotos;
-  //      }
-
-  //      if (
-  //        filteredSubProduts.length === 1 &&
-  //        Object.values(valuesVariants).length === arr.length
-  //      ) {
-  //        const subProductPrice = filteredSubProduts[0].list_price;
-  //        productPriceElem.textContent = `${MXPrice.format(productListPrice)} MXN`;
-  //        productListPrice = subProductPrice;
-  //      }
-
-  //      // Verificar si se han seleccionado todas las variantes necesarias
-  //      const allSelected = Object.keys(allVariants).every(
-  //        key => valuesVariants[key],
-  //      );
-
-  //      // Habilitar controles de cantidad si todas las variantes están seleccionadas
-  //      if (allSelected) {
-  //        restButton.disabled = false;
-  //        quantityInput.disabled = false;
-  //        addButton.disabled = false;
-  //      }
-  //    });
-
-  //    // Agregar etiqueta y select al grupo de formulario
-  //    formGroup.appendChild(label);
-  //    formGroup.appendChild(select);
-
-  //    // Agregar grupo de formulario al contenedor
-  //    containerVariants.appendChild(formGroup);
-  //  });
-
   render() {
     const containerVariants = document.createElement('div');
     containerVariants.className = `dub-item-variant-container`;
     Object.keys(this.allVariants).forEach(variantKey => {
       const formGroup = document.createElement('div');
+      formGroup.id = `FormGroup-${variantKey}`;
 
       const label = document.createElement('label');
+      label.htmlFor = `select_${variantKey}`;
       label.textContent = variantKey;
 
       const options = this.allVariants[variantKey];
       const select = document.createElement('select');
+      select.className = `dub-item-variant-select ${
+        // addToCartError
+        false && !this.valuesVariants[variantKey] ? 'text-error' : ''
+      }`;
+      select.value = this.valuesVariants[variantKey] || '';
       select.id = `select_${variantKey}`;
       select.name = `select_${variantKey}`;
       select.addEventListener('change', e =>
@@ -123,7 +33,7 @@ export class VariantSelector {
 
       const defaultOption = document.createElement('option');
       defaultOption.value = '';
-      defaultOption.textContent = `Seleccionar ${variantKey}`;
+      defaultOption.textContent = `${variantKey}`;
       defaultOption.disabled = true;
       select.appendChild(defaultOption);
 
