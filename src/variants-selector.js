@@ -1,7 +1,11 @@
+import {
+  getProductsFilteredbyValues,
+  getVariantsFilteredbyValues,
+} from './utils';
 export class VariantSelector {
-  constructor({ container, allVariants, subProducts, onChange }) {
+  constructor({ container, subProducts, onChange }) {
     this.container = container;
-    this.allVariants = allVariants;
+    this.allVariants = getVariantsFilteredbyValues({}, subProducts);
     this.subProducts = subProducts;
     this.valuesVariants = {};
     this.onChange = onChange;

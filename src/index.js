@@ -1,18 +1,13 @@
-import qs from 'qs';
 import { getProduct, getProducts } from './request/orders';
-import {
-  getProductsFilteredbyValues,
-  getVariantsFilteredbyValues,
-  paramReplace,
-} from './utils';
+import { getVariantsFilteredbyValues } from './utils';
+// stiles
 import styles from './styles.css';
 
+// components
 import { ProductCheckoutButton } from './checkout-button';
 import { QuantityControl } from './quantity-control';
 import { VariantSelector } from './variants-selector';
-
-// Constants
-const checkoutExpressPath = 'comprar-articulo/:businessID/:productID';
+import { ProductImage } from './product-image';
 
 async function checkoutButton({
   mashupID,
@@ -31,7 +26,7 @@ async function checkoutButton({
   let subProducts = [];
   let productBusinessID = null;
 
-  let quantityShoppingCart = 1;
+  // let quantityShoppingCart = 1;
   let valuesVariants = {};
 
   const root = document.getElementById(containerID);
@@ -102,7 +97,7 @@ async function checkoutButton({
   const quantityControl = new QuantityControl({ container: container });
   const variantSelector = new VariantSelector({
     container: container,
-    allVariants: getVariantsFilteredbyValues({}, subProducts),
+    // allVariants: getVariantsFilteredbyValues({}, subProducts),
     subProducts,
     onChange: (valuesVariants, filteredSubProducts) => {
       if (
@@ -123,6 +118,10 @@ async function checkoutButton({
     subProducts,
   });
 
+  const productImage = new ProductImage({
+    container: imgContainer,
+    src: productPhotos?.[0],
+  });
   container.appendChild(productNameElem);
   container.appendChild(productDescriptionElem);
   container.appendChild(productPriceElem);
@@ -132,6 +131,7 @@ async function checkoutButton({
   quantityControl.render();
   // container.appendChild(quantityContainer);
   checkoutButton.render();
+  productImage.render();
   // container.appendChild(purchaseButton);
   // if (imageContainer) {
   //   imgContainer.appendChild(imageContainer);
