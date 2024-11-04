@@ -3,11 +3,11 @@ import {
   getVariantsFilteredbyValues,
 } from './utils';
 export class VariantSelector {
-  constructor({ container, subProducts, onChange }) {
+  constructor({ container, subProducts, onChange, valuesVariants }) {
     this.container = container;
     this.allVariants = getVariantsFilteredbyValues({}, subProducts);
     this.subProducts = subProducts;
-    this.valuesVariants = {};
+    this.valuesVariants = valuesVariants;
     this.onChange = onChange;
   }
 
@@ -37,8 +37,9 @@ export class VariantSelector {
 
       const defaultOption = document.createElement('option');
       defaultOption.value = '';
-      defaultOption.textContent = `${variantKey}`;
+      defaultOption.textContent = `Selecciona ${variantKey}`;
       defaultOption.disabled = true;
+      defaultOption.selected = true;
       select.appendChild(defaultOption);
 
       options.forEach(optionValue => {

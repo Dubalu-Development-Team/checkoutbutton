@@ -62,6 +62,10 @@ export class QuantityControl {
     this.quantityInput.value = this.quantity;
   }
 
+  getQuantity() {
+    return this.quantity;
+  }
+
   enable() {
     this.disabled = false;
     [this.quantityInput, ...this.container.querySelectorAll('button')].forEach(

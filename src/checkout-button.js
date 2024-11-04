@@ -10,6 +10,7 @@ export class ProductCheckoutButton {
     quantityControl,
     valuesVariants,
     subProducts,
+    productBusinessID,
   }) {
     this.container = container;
     this.product = product;
@@ -17,6 +18,7 @@ export class ProductCheckoutButton {
     this.quantityControl = quantityControl;
     this.valuesVariants = valuesVariants;
     this.subProducts = subProducts;
+    this.productBusinessID = productBusinessID;
   }
 
   render() {
@@ -28,19 +30,30 @@ export class ProductCheckoutButton {
   }
 
   checkout() {
-    const selectedProduct =
-      getProductsFilteredbyValues(this.valuesVariants, this.subProducts)[0] ||
-      this.product;
+    let productId = this.product.id;
     const queryParams = new URLSearchParams(window.location.search);
-    const params = {
-      quantity: this.quantityControl.quantity,
-      referral: queryParams.get('referral'),
-      campaign: queryParams.get('campaign'),
-      click_id: queryParams.get('click_id'),
-    };
+    const paramsObj = { quantity: this.quantityControl.getQuantity() };
+    if (queryParams.has('referral')) {
+      paramsObj.referral = queryParams.get('referral');
+    }
+    if (queryParams.has('campaign')) {
+      paramsObj.campaign = queryParams.get('campaign');
+    }
+    if (queryParams.has('click_id')) {
+      paramsObj.click_id = queryParams.get('click_id');
+    }
+    if (this.subProducts && this.subProducts.length) {
+      const filteredSubProduts = getProductsFilteredbyValues(
+        this.valuesVariants,
+        this.subProducts,
+      );
+
+      productId = filteredSubProduts[0].id;
+    }
+
     window.location.href = `${this.shopUrl}${paramReplace(checkoutExpressPath, {
-      businessID: this.product.owner,
-      productID: selectedProduct.id,
-    })}/?${qs.stringify(params)}`;
+      businessID: this.productBusinessID,
+      productID: productId,
+    })}/?${qs.stringify(paramsObj)}`;
   }
 }

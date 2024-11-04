@@ -95,9 +95,14 @@ async function checkoutButton({
     'Los gastos de envío se calculan en la pantalla de pago.';
 
   const quantityControl = new QuantityControl({ container: container });
+  const productImage = new ProductImage({
+    container: imgContainer,
+    src: productPhotos?.[0],
+  });
+
   const variantSelector = new VariantSelector({
     container: container,
-    // allVariants: getVariantsFilteredbyValues({}, subProducts),
+    valuesVariants,
     subProducts,
     onChange: (valuesVariants, filteredSubProducts) => {
       if (
@@ -106,9 +111,12 @@ async function checkoutButton({
       ) {
         quantityControl.enable();
       }
+      // changue image photo
+      if (filteredSubProducts[0].photos?.[0]) {
+        productImage.setSrc(filteredSubProducts[0].photos?.[0]);
+      }
     },
   });
-
   const checkoutButton = new ProductCheckoutButton({
     container: container,
     product,
@@ -116,26 +124,18 @@ async function checkoutButton({
     quantityControl,
     valuesVariants: variantSelector.valuesVariants,
     subProducts,
+    productBusinessID,
   });
 
-  const productImage = new ProductImage({
-    container: imgContainer,
-    src: productPhotos?.[0],
-  });
+  const components = [variantSelector, quantityControl, checkoutButton];
+  if (showImage) {
+    components.push(productImage);
+  }
   container.appendChild(productNameElem);
   container.appendChild(productDescriptionElem);
   container.appendChild(productPriceElem);
   container.appendChild(shippingInfoElem);
-  variantSelector.render();
-  // container.appendChild(containerVariants);
-  quantityControl.render();
-  // container.appendChild(quantityContainer);
-  checkoutButton.render();
-  productImage.render();
-  // container.appendChild(purchaseButton);
-  // if (imageContainer) {
-  //   imgContainer.appendChild(imageContainer);
-  // }
+  components.forEach(c => c.render());
   mainContainer.appendChild(imgContainer);
   mainContainer.appendChild(container);
   root.appendChild(mainContainer);
