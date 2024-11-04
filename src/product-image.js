@@ -15,9 +15,11 @@ export class ProductImage {
   }
 
   setSrc(src) {
-    this.image.src = src;
+    this.src = src;
+    this.image.src = this.src;
   }
   setWidth(width) {
-    this.image.width = width;
+    this.width = width;
+    this.image.width = this.width;
   }
 }

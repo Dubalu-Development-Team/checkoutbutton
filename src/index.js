@@ -8,6 +8,7 @@ import { ProductCheckoutButton } from './checkout-button';
 import { QuantityControl } from './quantity-control';
 import { VariantSelector } from './variants-selector';
 import { ProductImage } from './product-image';
+import { ProductPrice } from './product-price';
 
 async function checkoutButton({
   mashupID,
@@ -53,6 +54,7 @@ async function checkoutButton({
   let productListPrice = product.list_price || 0;
   let productDescription = product.plain_description;
   let productPhotos = product.photos;
+  const productCurrency = product.currency;
   const initialDisableStatus = subProducts.length > 0;
 
   const allVariants = getVariantsFilteredbyValues({}, subProducts);
@@ -83,10 +85,15 @@ async function checkoutButton({
   productDescriptionElem.textContent = productDescription.substring(0, 260);
 
   // Product price
-  const productPriceElem = document.createElement('p');
-  const productListPriceWithFormat = MXPrice.format(productListPrice);
-  productPriceElem.className = 'dub-item-price';
-  productPriceElem.textContent = `${productListPriceWithFormat} MXN`;
+  // const productPriceElem = document.createElement('p');
+  // const productListPriceWithFormat = MXPrice.format(productListPrice);
+  // productPriceElem.className = 'dub-item-price';
+  // productPriceElem.textContent = `${productListPriceWithFormat} MXN`;
+  const productPrice = new ProductPrice({
+    container,
+    productPrice: MXPrice.format(productListPrice),
+    currency: productCurrency,
+  });
 
   // laber for
   const shippingInfoElem = document.createElement('p');
@@ -115,6 +122,15 @@ async function checkoutButton({
       if (filteredSubProducts[0].photos?.[0]) {
         productImage.setSrc(filteredSubProducts[0].photos?.[0]);
       }
+
+      // changue product variant price
+      if (
+        filteredSubProducts.length === 1 &&
+        Object.values(valuesVariants).length === Object.keys(allVariants).length
+      ) {
+        const subProductPrice = filteredSubProducts[0].list_price;
+        productPrice.setPrice(MXPrice.format(subProductPrice));
+      }
     },
   });
   const checkoutButton = new ProductCheckoutButton({
@@ -133,7 +149,8 @@ async function checkoutButton({
   }
   container.appendChild(productNameElem);
   container.appendChild(productDescriptionElem);
-  container.appendChild(productPriceElem);
+  // container.appendChild(productPriceElem);
+  productPrice.render();
   container.appendChild(shippingInfoElem);
   components.forEach(c => c.render());
   mainContainer.appendChild(imgContainer);
